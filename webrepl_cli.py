@@ -230,8 +230,11 @@ def main():
 
     ws = websocket(s)
 
-    import getpass
-    passwd = getpass.getpass()
+    if os.environ.get('WEBREPL_PWD'):
+        passwd = os.environ['WEBREPL_PWD']
+    else:
+        import getpass
+        passwd = getpass.getpass()
     login(ws, passwd)
     print("Remote WebREPL version:", get_ver(ws))
 
